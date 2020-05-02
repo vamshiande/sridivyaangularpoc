@@ -1,4 +1,3 @@
-<p>product works!</p>
 
 <div class="table-responsive">
     <table class='table'>
@@ -13,13 +12,16 @@
         </thead>
         <tbody>
            <tr *ngFor = "let product of products">
-                <td><a class="navbar-item" routerLink="/product-detail" >
-                    <img src=imageUrl alt="apple" height="30" width="30">
+                <td><a  [routerLink]="[product.productId]" >
+                    <img src=imageUrl alt="apple" height="30" width="30"  (click)="getProductDetails(product.productId)">
+                    
                     </a> </td>
-                <td><a class="navbar-item" routerLink="/product-detail"> {{product.productId}}</a></td>
-                <td><a class="navbar-item">{{product.productName}}</a></td>
+                <td><a  [routerLink]="[product.productId]"> {{product.productId}}</a></td>
+                <td><a >{{product.productName}}</a></td>
                 <td> {{product.price}} </td>
             </tr>
         </tbody>
     </table>
+    
 </div>
+<app-productdetails [productDetails]="filteredProduct"></app-productdetails>

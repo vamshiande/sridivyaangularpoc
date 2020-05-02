@@ -1,5 +1,8 @@
+import { ProductService } from './product.service';
 import { Component, OnInit } from '@angular/core';
 import {IProduct} from './products';
+import { Observable } from 'rxjs';
+import { map,filter } from 'rxjs/operators';
 
 @Component({
   selector: 'app-product',
@@ -10,35 +13,41 @@ import {IProduct} from './products';
 
 export class ProductComponent implements OnInit {
 
-  products : IProduct [] = [];
-  constructor() {}
+ public products :  IProduct[];
+ public filteredProduct:  IProduct[];
+ public product :  IProduct;
+  constructor(private productService:ProductService) {}
     
   
 
   ngOnInit(): void {
-      this.products = [
-        {
-        productId : 100,
-        productName : "Apple",
-        price : 109,
-        imageUrl : "src\assets\img\download.png"
 
-      },
-      {
-        productId : 101,
-        productName : "Oranges",
-        price : 90,
-        imageUrl : "src\assets\img\download.png"
+    this.productService.getProducts()
+    .subscribe(prod =>{this.products=prod}
 
-      },
-      {
-        productId : 102,
-        productName : "Banana",
-        price : 109,
-        imageUrl : "src\assets\img\download.png"
-
-      }
-    ]
+      );
+     
   }
+
+getProductDetails(id:number)
+{
+  this.productService.getProduct(id).pipe(
+    map(result =>
+      result.filter(one => one.productId === id)
+    )
+  ).subscribe(results => this.filteredProduct=results )
+
+}
+  
+  
+  
+  // .subscribe(prod=>
+  //   {
+  //     this.filteredProduct=prod
+  //   });
+  // this.product =this.filteredProduct[0];
+
+
+
 
 }
