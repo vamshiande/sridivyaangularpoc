@@ -1,7 +1,7 @@
 import { IProduct } from './products';
 import { Injectable } from '@angular/core';
 import { HttpClient, HttpHeaders } from '@angular/common/http';
-import { Observable } from 'rxjs';
+import { Observable,BehaviorSubject } from 'rxjs';
 import { map,filter } from 'rxjs/operators';
 
 
@@ -11,27 +11,31 @@ import { map,filter } from 'rxjs/operators';
 export class ProductService  {
 
   private productsURl='api/products';
+  private productSource = new BehaviorSubject<IProduct[]>([]);
+  products = this.productSource.asObservable();
+
+  public productss :  IProduct[];
+
   
+
      constructor(private http: HttpClient){}
 
-     getProducts():Observable<IProduct[]>{
+    getProducts():Observable<IProduct[]>{
+     return this.http.get<IProduct[]>(this.productsURl);
+    }
 
-        return this.http.get<IProduct[]>(this.productsURl);
+    
+    
+     getProducts1(){
+      var  productsArray  = this.http.get<IProduct[]>(this.productsURl)
+      .subscribe(singleproduct=>{this.productSource.next(singleproduct)});       
+ 
+      }
 
-     }
 
-     getProduct(id:number):Observable<IProduct[]>{
-
-      return this.http.get<IProduct[]>(this.productsURl).pipe(
-        map(result =>
-          result.filter(one => one.productId === id)
-        )
-      // .pipe(        
-      //  filter(products=>products.productId==id)
-        
-      );
-
-   }
+    // getSelectedProducts(id:number):Observable<IProduct[]{
+    //   return this.http.get<IProduct[]>(this.productsURl);
+    // }
   
 
 }

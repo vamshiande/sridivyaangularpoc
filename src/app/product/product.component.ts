@@ -21,21 +21,17 @@ export class ProductComponent implements OnInit {
   
 
   ngOnInit(): void {
-
-    this.productService.getProducts()
-    .subscribe(prod =>{this.products=prod}
-
-      );
-     
+    this.productService.getProducts1();
+    this.productService.products.subscribe((productss=>{this.products=productss}))
+              
   }
 
 getProductDetails(id:number)
 {
-  this.productService.getProduct(id).pipe(
-    map(result =>
-      result.filter(one => one.productId === id)
-    )
-  ).subscribe(results => this.filteredProduct=results )
+  this.productService.getProducts().pipe(
+    map(products=>products.filter(product=>product.productId==id))
+  
+  ).subscribe(singleproduct=>{this.filteredProduct=singleproduct})
 
 }
   

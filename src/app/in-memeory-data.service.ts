@@ -14,22 +14,23 @@ export class InMemeoryDataService implements InMemoryDbService {
       productId : 100,
       productName : "Apple",
       price : 109,
-      imageUrl : "src\assets\img\download.png"
+      imageUrl : "assets/img/download.png",
+      description : "sweet fuji apples"
 
     },
     {
       productId : 101,
       productName : "Oranges",
       price : 90,
-      imageUrl : "src\assets\img\download.png"
-
+      imageUrl : "assets/img/orange-600x600-500x500.jpg",
+      description : "premium seedless oranges"
     },
     {
       productId : 102,
       productName : "Banana",
       price : 109,
-      imageUrl : "src\assets\img\download.png"
-
+      imageUrl : "assets/img/banana.jpg",
+      description : "tasty yellow banana"
     }
   ];
     return {products};

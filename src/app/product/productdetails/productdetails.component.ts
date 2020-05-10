@@ -11,8 +11,9 @@ import { Component, OnInit, Input } from '@angular/core';
 export class ProductdetailsComponent implements OnInit {
 
   constructor( private productService: ProductService) { }
+  @Input() productDetails:IProduct;
 
-  @Input() productDetails : IProduct;
+
 
   ngOnInit(): void {
 

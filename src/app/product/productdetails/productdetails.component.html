@@ -1,4 +1,13 @@
-<p *ngFor="let prod of productDetails" >{{prod.productId}},{{prod.productName}},{{prod.price}}</p>
+<div class="table-responsive">
+    <table class='table'>
+      <tbody *ngFor = "let prod of productDetails" >
+        <tr>    <td>Product Name     :       {{prod.productName}}</td></tr>
+        <tr> <td>Price             :       {{prod.price}}</td> </tr> 
+          <tr><td>Decription       :         {{prod.description}}</td></tr>
+          <tr><td></td></tr>
+        </tbody>
+</table>
+</div>
 
 
 
