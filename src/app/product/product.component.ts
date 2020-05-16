@@ -14,24 +14,33 @@ import { map,filter } from 'rxjs/operators';
 export class ProductComponent implements OnInit {
 
  public products :  IProduct[];
- public filteredProduct:  IProduct[];
+ public filteredProduct:  IProduct;
  public product :  IProduct;
   constructor(private productService:ProductService) {}
     
   
 
   ngOnInit(): void {
-    this.productService.getProducts1();
-    this.productService.products.subscribe((productss=>{this.products=productss}))
+    if(!this.products)
+    {
+      setTimeout(() => {this.productService.getProducts1();
+        
+      }, 1000); 
+      this.productService.products.subscribe((productss=>{this.products=productss}))
+    }
+    
               
   }
 
 getProductDetails(id:number)
 {
-  this.productService.getProducts().pipe(
-    map(products=>products.filter(product=>product.productId==id))
-  
-  ).subscribe(singleproduct=>{this.filteredProduct=singleproduct})
+this.productService.getSelectedProd(id);
+this.productService.addedToCartMessage="";
+
+  this.productService.selectedProduct.subscribe((prod=>{
+
+    this.filteredProduct=prod;
+  }))
 
 }
   

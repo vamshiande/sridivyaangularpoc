@@ -7,6 +7,7 @@ import { ProductComponent } from './product.component';
 const routes: Routes = [
   { path: '', 
   component: ProductComponent,
+  data: { reuseRoute: true },
   children:[
 
     { path: ':id',  component: ProductdetailsComponent } 

@@ -25,14 +25,16 @@ export class LoginComponent implements OnInit {
 
   ngOnInit() {
     this.nav.visible = false;
+    this.nav.visible1 = false;
   }
 
   onSubmit(){
+      if (this.model.username === "admin"){
+        this.nav.visible1 = true;
+      }
       this.nav.visible = true;
       this.router.navigate(['/home']);
-      // console.log("login success");
-      
-  
+      // console.log("login success");       
   }
 
 }

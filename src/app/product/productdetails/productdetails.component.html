@@ -1,12 +1,33 @@
 <div class="table-responsive">
     <table class='table'>
-      <tbody *ngFor = "let prod of productDetails" >
-        <tr>    <td>Product Name     :       {{prod.productName}}</td></tr>
-        <tr> <td>Price             :       {{prod.price}}</td> </tr> 
-          <tr><td>Decription       :         {{prod.description}}</td></tr>
-          <tr><td></td></tr>
+      <tbody  *ngIf="productDetails">
+        <tr>    <td>Product Name     :       {{productDetails.productName}}</td></tr>
+        <tr> <td>Price             :       {{productDetails.price}}</td> </tr> 
+          <tr><td>Decription       :         {{productDetails.description}}</td></tr>
+          <tr><td><button type="submit" class="btn btn-primary " (click)="AddToCart()" >Add to cart</button></td>
+           <td>
+            <!-- <select (change)="testDropdownSelectValue()" [(ngModel)]="quantity">
+              <option value="1" [selected]="quantity ==1">1</option>
+              <option value="2" [selected]="quantity ==2">2</option>
+              <option value="3" [selected]="quantity ==3">3</option>
+              <option value="4" [selected]="quantity ==4">4</option>
+            </select> -->
+            <select (change)="handleSelectedValue($event)" >
+              <option value="1" >1</option>
+              <option value="2" >2</option>
+              <option value="3" >3</option>
+              <option value="4" >4</option>
+            </select>
+          </td>
+          </tr>
+          <tr><td>{{ productService.addedToCartMessage }}</td></tr>  
+          
         </tbody>
 </table>
+
+   
+     
+
 </div>
 
 
